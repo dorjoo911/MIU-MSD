@@ -1,0 +1,16 @@
+Algorithm enqueue(e)
+    Innput: Element e
+    stack1.push(e)
+Algorithm dequeue()
+    Output: Element at the front of the queue
+    if stack1.isEmpty() and stack2.isEmpty() then
+        throw EmptyQueueException
+    else
+        if stack2.isEmpty() then
+            while   stack1.isEmpty() do
+                    stack2.push(stack1.pop())
+        p <-stack2.pop()
+        return p
+The running time for enqueue Algorithm is O(1)
+The running time for dequeue Algorithm is O(n)
+

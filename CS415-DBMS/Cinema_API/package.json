@@ -1,0 +1,21 @@
+{
+  "name": "cinema_api",
+  "version": "1.0.0",
+  "description": "Online movie theater rest api",
+  "main": "server.js",
+  "scripts": {
+    "start": "NODE_ENV=production node server",
+    "dev": "nodemon server"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "morgan": "^1.10.0",
+    "rotating-file-stream": "^3.0.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  }
+}

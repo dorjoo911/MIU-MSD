@@ -1,0 +1,82 @@
+db.record.insert([
+     {
+        "movie":{
+                "movie_id":2,
+                "title":"superman"
+                },
+        "user":{
+                "user_id":1,
+                "user_name":"Bart"
+                },
+        "tr_date":"05/26/2022",
+        "amount":4.99
+    },
+      {
+        "movie":{
+                "movie_id":1,
+                "title":"batman"
+                },
+        "user":{
+                "user_id":2,
+                "user_name":"George"
+                },
+        "tr_date":"05/26/2022",
+        "amount":3.99
+    },
+      {
+        "movie":{
+                "movie_id":1,
+                "title":"batman"
+                },
+        "user":{
+                "user_id":3,
+                "user_name":"Barbara"
+                },
+        "tr_date":"05/26/2022",
+        "amount":3.99
+    },
+      {
+        "movie":{
+                "movie_id":2,
+                "title":"superman"
+                },
+        "user":{
+                "user_id":5,
+                "user_name":"Nina"
+                },
+        "tr_date":"05/25/2022",
+        "amount":4.99
+    },
+    {
+        "movie":{
+                "movie_id":2,
+                "title":"superman"
+                },
+        "user":{
+                "user_id":1,
+                "user_name":"Bart"
+                },
+        "tr_date":"05/26/2022",
+        "amount":4.99
+    },
+])
+
+db.record.aggregate([
+    {
+        $group:{_id: "$movie"},
+        total: {$sum: "amount"}
+    }
+ ])
+
+{movie: "title", name: "user", comments:["comment1, comment2]}
+
+db.movies.find({
+        title:"title",
+        name:"user.user_name",
+        comments:"user.comments"
+})
+
+
+
+
+

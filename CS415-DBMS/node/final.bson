@@ -1,0 +1,57 @@
+{
+    _id: 2,
+    description: "description",
+    comment: "comment",
+    equipment: {
+        name: "equipment name",
+        barcode: "barcode"
+                },
+    technician: {
+        name: "technician name",
+        department: "department 1"
+                },
+spares: [
+    {
+    name: "spare 1",
+    price: 30
+    },
+    {
+    name: "spare 2",
+    price: 50
+    }
+        ] 
+}
+#1
+db.em.find({},
+   {
+        _id:0,
+        description:1,
+        equipment:1,
+        technician:1
+    },
+    {
+        $skip:1
+    },
+    {
+        $limit:3
+    }
+).pretty()
+
+db.em.aggregate([{$match:{
+{$and:[{"technician.name":"technician name"},
+{$or:[{"equipment.name":"equipment name1"},{"equipment.name":"equipment name"}  ]}
+]}}},
+{$sort:{"equipment.name":-1}}
+])
+
+db.em.aggregate([{$match:{
+$or:[
+{"equipment.name":"equipment name1"},
+{"equipment.name":"equipment name"}]
+}},
+{$match:{"technician.name":"technician name"}},
+{$sort:{"equipment.name":-1}}
+])
+    
+db.em.aggregate([{$match:{"equipment.name":/name/}}])
+    

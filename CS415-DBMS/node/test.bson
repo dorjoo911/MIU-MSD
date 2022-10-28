@@ -1,0 +1,85 @@
+db.movies.insert([
+    {
+        "movie_id": 2,
+        "title":"Superman",
+        "pub_date":"05/18/1975",
+        "price":4.99,
+        "rating":4.6,
+        "actors":["Calvin", "Zoe", "Bolt"],
+        "user" : {
+                    "user_id":1,
+                    "user_name":"Bart",
+                    "reg_date":"05/15/2022",
+                    "comments":
+                        [ 
+                            {"comment":"Cool movie", "date":"06/12/2022"},
+                            {"comment":"Hahah, Cool", "date":"04/20/2022"},
+                            {"comment":"Ok", "date":"05/26/2022"}
+                        ],
+                    "review": 6,
+                    "views": 2
+                }
+    },
+      {
+        "movie_id": 1,
+        "title":"Batman",
+        "pub_date":"05/16/1965",
+        "price":3.99,
+        "rating":5.6,
+        "actors":["John", "Sarah", "Will"],
+        "user" : {
+                    "user_id":2,
+                    "user_name":"George",
+                    "reg_date":"05/16/2022",
+                    "comments":
+                        [ 
+                            {"comment":"Nvmovie", "date":"05/22/2022"},
+                            {"comment":"Cool", "date":"05/21/2022"},
+                            {"comment":"Ok movie", "date":"03/19/2022"}
+                        ],
+                    "review": 5,
+                    "views": 1
+                }
+    },
+      {
+        "movie_id": 1,
+        "title":"Batman",
+        "pub_date":"05/16/1965",
+        "price":3.99,
+        "rating":5.6,
+        "actors":["John", "Sarah", "Will"],
+        "user" : {
+                    "user_id":3,
+                    "user_name":"Barbara",
+                    "reg_date":"05/23/2022",
+                    "comments":
+                        [ 
+                            {"comment":"Lol", "date":"05/23/2022"},
+                            {"comment":"N/a", "date":"05/23/2022"},
+                            {"comment":"Ooops", "date":"05/29/2022"}
+                        ],
+                    "review": 6,
+                    "views": 2
+                }
+    },
+      {
+        "movie_id": 2,
+        "title":"Superman",
+        "pub_date":"05/16/1965",
+        "price":4.99,
+        "rating":4.6,
+        "actors":["Calvin", "Zoe", "Bolt"],
+        "user" : {
+                    "user_id":5,
+                    "user_name":"Nina",
+                    "reg_date":"05/24/2022",
+                    "comments":
+                        [ 
+                            {"comment":"", "date":"05/25/2022"},
+                            {"comment":"dfbhsgtrhsrgyh", "date":"05/19/2022"}
+                        ],
+                    "review": 6,
+                    "views": 5
+                }
+    }
+    ])

@@ -1,0 +1,188 @@
+db.restaurants.aggregate([
+{$project: { _id: 0,
+restaurant_id: 1,
+name: 1, 
+district: 1, 
+cuisine: 1 } }
+])
+
+db.restaurants.aggregate([
+        {$match:{district:"Bronx"}}, 
+        {$limit:5}
+])
+
+db.restaurants.aggregate([
+        {$match:{district:"Bronx"}}, 
+        {$skip:5},
+        {$limit:5}
+])
+
+db.restaurants.find({
+"address.coord":{$elemMatch: {$lt:-95.754168}}})
+
+db.restaurants.find({
+"cuisine": {$ne: 'American'},
+"grades.score":{$gt: 70},
+"address.coord":{$elemMatch: {$lt:-65.754168}}
+})
+
+db.restaurants.aggregate([
+{$match:{name: /^Wil/}},
+{$project: { _id: 0,
+restaurant_id: 1,
+name: 1, 
+district: 1, 
+cuisine: 1 } }
+])
+
+db.restaurants.aggregate([
+{$match:{name: /ces$/}},
+{$project: { _id: 0,
+restaurant_id: 1,
+name: 1, 
+district: 1, 
+cuisine: 1 } }
+])
+
+db.restaurants.aggregate([
+{$match:{name: /Reg/}},
+{$project: { _id: 0,
+restaurant_id: 1,
+name: 1, 
+district: 1, 
+cuisine: 1 } }
+])
+
+{$and:[{district:"Bronx"},
+
+db.restaurants.find(
+{"$and": [
+{"district" : "Bronx"},
+{"$or": [
+    {"cuisine" : "American" },
+    { "cuisine" : "Chinese"}]
+   }]
+}).sort({name:-1}).skip(2).limit(2).pretty()
+
+db.restaurants.find(
+{$or:[{district:"Staten Island"},
+{district:"Queens"},
+{district:"Bronx"},
+{district:"Brooklyn"}]},
+{ _id: 0,
+restaurant_id: 1,
+name: 1, 
+district: 1, 
+cuisine: 1 }
+)
+
+db.restaurants.find(
+{$nor:[{district:"Staten Island"},
+{district:"Queens"},
+{district:"Bronx"},
+{district:"Brooklyn"}]},
+{ _id: 0,
+restaurant_id: 1,
+name: 1, 
+district: 1, 
+cuisine: 1 }
+)
+
+db.restaurants.find(
+{"grades.score":{$not:{$gt:10}}},
+{ _id: 0,
+restaurant_id: 1,
+name: 1, 
+district: 1, 
+cuisine: 1})
+
+db.restaurants.find(
+{"address.coord":{$gt:42, $lt:52}})
+
+db.restaurants.find( 
+{ "address.coord.1": {$gt : 42, $lte : 52}},
+{"restaurant_id" : 1,"name":1,"address":1,"coord":1});
+
+db.restaurants.aggregate([
+    {$sort:{"name":1}},
+    {$project:{ _id: 0,
+name: 1, 
+}}
+])
+
+db.restaurants.find(
+    {},
+    {_id:0,name:1, district:-1}).sort(
+        {"cuisine":1,"district" : -1,})
+
+db.restaurants.aggregate([
+{ $match: { $nor: [{"district":"Queens"}] }},
+{$project:{_id:0,
+"food":"$cuisine"}},
+{$group:{_id:"$food", "num_of_rests":{$sum:1}}},
+
+])
+
+db.zip.aggregate([
+{$match:{$and:[{state:"WA", pop:{$lt:5000}}]}},
+{$group:{_id:"$city", population:{$sum:"$pop"}}},
+{$project:{_id:0,
+city: "$_id",
+population: 1,
+state: 1}},
+{$sort:{city:-1}}
+])
+
+db.zip.aggregate([
+{$match:{$and:[{state:"WA", pop:{$lt:5000}}]}},
+{$group:{_id:"$city"}},
+{$project:{_id:0,
+city: "$_id"}},
+{$sort:{city:-1}}
+])
+
+db.zip.aggregate([
+{$group:{_id:{state:"$state", city:"$city"}}},
+{$sort:{city:-1, state:-1}}    
+])
+
+db.zip.aggregate([
+    {$group:{_id:"$state"}},
+    {$group:{_id:"$city"}},
+    {$sort:{pop:1}},
+    {$limit:1}
+])
+
+db.zip.aggregate( [
+{$group: 
+{
+    _id: {state:"$state", city:"$city"}, 
+pop:{$sum:"$pop"} 
+} } },{$sort:{pop: 1}},{$group: 
+{
+    _id: "$_id.state", 
+least_pop: {$first: "$pop"} } }
+] )
+
+db.zip.aggregate( [
+   { $group:
+      {
+        _id: { state: "$state", city: "$city" },
+        pop: { $sum: "$pop" }
+      }
+   },
+   { $sort: { pop: 1 } },
+   { $group:
+      {
+        _id : "$_id.state",     
+        smallestCity: { $first: "$_id.city" },
+        smallestPop:  { $first: "$pop" }
+      }
+   },
+  { $project:
+    { _id: 0,
+      state: "$_id",    
+      smallestCity: { name: "$smallestCity", pop: "$smallestPop" }
+    }
+  }
+] )
